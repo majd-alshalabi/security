@@ -10,6 +10,8 @@ const userSchema = new Schema({
   phoneNumber: String,
   telephoneNumber: String,
   isAdmin: { type: Boolean, default: false },
+  sessionKey: { type: String, required: false },
+  publicKey: { type: String, required: false },
 });
 
 userSchema.methods.makeUserJwtToken = function () {

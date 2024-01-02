@@ -8,14 +8,21 @@ class Utils {
       data: data,
     });
   }
-
+  static uuidv4() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
+  }
   static initRequestFunction({ validationRules, callback }, req, res) {
     try {
       const schema = Joi.object(validationRules);
       const { error } = schema.validate(req.body);
       if (error) {
-        console.log(error);
-        console.log("Adgdsg");
         this.returnResponse(
           { message: error.details[0].message, statusCode: 400 },
           res

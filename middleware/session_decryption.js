@@ -3,14 +3,10 @@ const Utils = require("../utils/utils");
 
 module.exports = function (req, res, next) {
   try {
-    console.log("DSagsdag");
-
     req.body = EncryptionUtils.decryptRequest(
       req.body.data,
-      req.user.passNumber
+      req.user.sessionKey
     );
-    console.log(req.body);
-    console.log("DSagsdag");
     next();
   } catch (e) {
     Utils.returnResponse(

@@ -121,11 +121,7 @@ router.post("/login", (req, res) => {
     res
   );
 });
-
-router.get("/logout", (req, res) => {
-  res.send("logout");
-});
-
+////
 router.post("/update", [auth, decryption], (req, res) => {
   Utils.initRequestFunction(
     {
@@ -139,7 +135,7 @@ router.post("/update", [auth, decryption], (req, res) => {
           const user = await User.findOne({ _id: req.user._id });
           user.telephoneNumber = req.body.telephoneNumber;
           user.phoneNumber = req.body.phoneNumber;
-          user.save();
+          await user.save();
           Utils.returnResponse(
             {
               data: EncryptionUtils.encryptResponse(
